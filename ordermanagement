@@ -1,1 +1,20 @@
 
+Schedule Arrival Date = Schedule Ship Date + Delivery Lead Time
+
+Delivery Lead Time needs to be calculated in order to calculate the Schedule Arrival Date. Delivery lead Time is the Transit time taken.
+Request Date Type - Possible values are arrival and ship. If the value is arrival then the request date and promise date will be considered arrival dates by the system; if the value is ship then it will be considered ship dates. The request date type can be defaulted from the customer information to the order, and the user can change it on the order if required.
+If you set the Order Date Type = Arrival in the header, and you will be able to update the Schedule Arrival Date ,
+but  when you try to update the Schedule Ship Date  with the Availability , will get the below error.
+“The order date type is "Arrival", Schedule ship date can't be manually changed. Schedule ship date can be recalculated if you change request date or schedule arrival date.”
+
+1) Request Date (RDD) – Date the customer wanted the product
+2) Booked Date – Date the order was booked in EBS
+3) Schedule Arrival Date (SAD) – Date given by ATP service which takes into account the Request date, warehouse, item qty. Does NOT change unless manually adjusted.
+4) Schedule Ship Date (SSD) – Calculated based off of the Schedule Arrival Date, backs off the lead time between the destination and the source, this is built in the shipping network. Does NOT change unless the Schedule Arrival Date changes. This is currently the date that determines reservation. 
+If the Schedule ship date is within 8 days, the order will get reservation if product is available and on-hand.
+5) Suggested Ship Date – Expected Available Date, ETA date – this is the date calculated in planning starting 1 day after order is booked and is based on planning output.
+If more supply comes in, this could be earlier than the schedule ship date, if something changed and we don’t have the supply we thought we were going to, 
+it could be later than the schedule ship date. This date can change daily especially if the order is pegged to supply that is not firm (planned order). VCP is now prioritizing Request Date, instead of schedule ship date, when giving this suggested ship date.
+
+
+
